@@ -50,13 +50,16 @@ switch$this->amethod)
 		{
 		 $xcode.=<<<EOR
 		 <unit>
-    <id>{$aRecords['id']}</id>
-    <title>{$aRecords['title']}</title>
-    <author>{$aRecords['author']}</author>
-    <image>{$aRecords['thumb']}</image>
-    <views>{$aRecords['views']}</views>
+    <id>{$aresult['id']}</id>
+    <title>{$aresult['title']}</title>
+    <author>{$aresult['author']}</author>
+    <image>{$aresult['thumb']}</image>
+    <views>{$aresult['views']}</views>
 </unit>
 EOR;
+}
+}
+
 header('content-type:text/xml; charset:utf-8');
 echo <<<EOR
 
@@ -64,8 +67,48 @@ echo <<<EOR
 <blog>
 {$xcode};
 </blog>
-		}
-	}
+EOR;
+break;
+ 
+ case 'html':
+  $xcode='';
+  if(count($data))
+  {
+  	foreach ($data as $i => $aresult) {
+  		$xcode.=<<<EOR
+  		<div>
+  		<p>title:{$aresult['title']}</p>
+         <p>author:{$aresult['author']}</p>
+         <p>views:{$aresult['id']}</p>
+         <p><img src="{$aresult['thumb']}" style="width:100px; height:100px; float:left;"><p>
+
+  		</div>
+EOR;
+  	}
+  }
+else
+	$xcode.=<<<EOR
+<div>nothing is found</div>
+EOR;
+header('content-type:text/html charset:utf-8');
+echo $xcode;
+break;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 }
