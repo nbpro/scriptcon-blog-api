@@ -4,6 +4,25 @@
 include_once('lib_api/database.php');
 //load the final library class
 include_once('lib_api/cservice.php');
-$oservice=new cservice();
+$newservice=new cservice();
 
+$newservice->setmethod($_REQUEST['type']);
+if(isset($_GET['limit']))
+{
+	$newservice->setlimit($_GET['limit']);
+}
+switch ($_REQUEST['action'])
+ {
+	case 'last_blog':
+		$newservice->last_blog();
+		break;
+
+	case 'top_blog':
+	    $newservices->setorder('top');
+        $newservices->last_blog();
+
+	     break;	
+	
+	
+}
 ?>
